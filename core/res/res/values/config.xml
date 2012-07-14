@@ -1277,6 +1277,9 @@
          To do this, add 21407 item to values-mcc214-mnc04/config.xml -->
     <string-array translatable="false" name="config_operatorConsideredNonRoaming">
     </string-array>
+    
+        <!-- Boolean to enable Stylus gestures -->
+    <bool name="config_stylusGestures">false</bool>
 
     <!-- Threshold (in ms) under which a screen off / screen on will be considered a reset of the
          immersive mode confirmation prompt.-->
