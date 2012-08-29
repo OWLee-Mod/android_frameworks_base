@@ -2292,7 +2292,13 @@ public final class Settings {
          */
         @Deprecated
         public static final String SHOW_WEB_SUGGESTIONS = "show_web_suggestions";
-
+		
+	    /**	
+ 	    * Whether to show the IME switcher in the status bar
+	    * @hide
+	 	*/
+       	public static final String STATUS_BAR_IME_SWITCHER = "status_bar_ime_switcher";
+		
         /**
          * Whether the notification LED should repeatedly flash when a notification is
          * pending. The value is boolean (1 or 0).
