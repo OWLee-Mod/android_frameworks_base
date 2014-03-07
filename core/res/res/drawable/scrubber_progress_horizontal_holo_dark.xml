@@ -23,6 +23,6 @@
     </item>
     <item android:id="@android:id/progress">
         <scale android:scaleWidth="100%"
-               android:drawable="@android:drawable/scrubber_primary_holo_dak" />
+               android:drawable="@android:drawable/scrubber_primary_holo_dark" />
     </item>
 </layer-list>
