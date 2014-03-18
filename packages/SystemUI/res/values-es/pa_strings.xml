@@ -52,4 +52,6 @@
     <string name="quick_settings_location_mode_high_label">Alta</string>
     <string name="quick_settings_location_mode_battery_label">Batería</string>
     <string name="quick_settings_location_mode_sensors_label">Dispositivo</string>
+    <string name="navbar_recents_clear_all_title">Limpiar recientes</string>
+    <string name="navbar_recents_clear_all_message">¿Le gustaría que el "boton recientes" limpie todas las aplicaciones?</string>
 </resources>
