@@ -2735,7 +2735,6 @@ public final class Settings {
         public static final String LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
 
         /**
-        /**
          * Enable Stylus Gestures
          *
          * @hide
@@ -2783,6 +2782,8 @@ public final class Settings {
          * @hide
          */
         public static final String GESTURES_DOUBLE_TAP = "gestures_double_tap";
+		
+		/**
          * Show the pending notification counts as overlays on the status bar
          * @hide
          */
