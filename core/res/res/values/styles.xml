@@ -1438,7 +1438,7 @@ please see styles_device_defaults.xml.
 
     <style name="TextAppearance.Holo.DialogWindowTitle">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textColor">@android:color/default_dialog_text_holo_dark</item>
     </style>
 
     <style name="TextAppearance.Holo.CalendarViewWeekDayView" parent="TextAppearance.Small.CalendarViewWeekDayView">
@@ -1537,7 +1537,7 @@ please see styles_device_defaults.xml.
 
     <style name="TextAppearance.Holo.Light.DialogWindowTitle">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textColor">@android:color/default_dialog_text_holo_light</item>
     </style>
 
     <style name="TextAppearance.Holo.Light.CalendarViewWeekDayView" parent="TextAppearance.Small.CalendarViewWeekDayView">
@@ -2146,9 +2146,12 @@ please see styles_device_defaults.xml.
     <style name="Widget.Holo.Light.ProgressBar" parent="Widget.Holo.ProgressBar">
     </style>
 
-    <style name="Widget.Holo.Light.ProgressBar.Horizontal" parent="Widget.Holo.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@android:drawable/progress_horizontal_holo_light</item>
-    </style>
+  <style name="Widget.Holo.Light.ProgressBar.Horizontal" parent="@style/Widget.ProgressBar.Horizontal">
+        <item name="maxHeight">16.0dip</item>
+        <item name="indeterminateDrawable">@drawable/progress_indeterminate_horizontal_holo_light</item>
+        <item name="progressDrawable">@drawable/progress_horizontal_holo_light</item>
+        <item name="minHeight">16.0dip</item>
+ </style>
 
     <style name="Widget.Holo.Light.ProgressBar.Small" parent="Widget.Holo.ProgressBar.Small">
     </style>
