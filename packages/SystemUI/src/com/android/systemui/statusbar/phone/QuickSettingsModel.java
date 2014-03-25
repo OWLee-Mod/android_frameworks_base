@@ -232,7 +232,12 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
             super(handler);
         }
 
-        @Override public void onChange(boolean selfChange) {
+    public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.PIE_STATE))) {
+                boolean enablePie = Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.PIE_STATE, 0) != 0;
+                if (enablePie) switchImmersiveGlobal();
+            }
             onNextAlarmChanged();
         }
 
@@ -326,7 +331,12 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         }
 
         @Override
-        public void onChange(boolean selfChange) {
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.PIE_STATE))) {
+                boolean enablePie = Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.PIE_STATE, 0) != 0;
+                if (enablePie) switchImmersiveGlobal();
+            }
             onImmersiveGlobalChanged();
             onImmersiveModeChanged();
         }
@@ -336,6 +346,8 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
             cr.unregisterContentObserver(this);
             cr.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.IMMERSIVE_MODE), false, this);
+            cr.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.PIE_STATE), false, this);
         }
     }
 
@@ -1050,7 +1062,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mBatteryCallback.refreshView(mBatteryTile, mBatteryState);
     }
 
-    // Location
     void addLocationTile(QuickSettingsTileView view, RefreshCallback cb) {
         mLocationTile = view;
         mLocationCallback = cb;
@@ -1500,11 +1511,14 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     private void onImmersiveGlobalChanged() {
         Resources r = mContext.getResources();
         final int mode = getImmersiveMode();
+        final boolean enabled = isPieEnabled();
         if (mode == IMMERSIVE_MODE_OFF) {
-            mImmersiveGlobalState.iconId = R.drawable.ic_qs_immersive_global_off;
+            mImmersiveGlobalState.iconId = enabled ?
+                    R.drawable.ic_qs_pie_global_off : R.drawable.ic_qs_immersive_global_off;
             mImmersiveGlobalState.label = r.getString(R.string.quick_settings_immersive_global_off_label);
         } else {
-            mImmersiveGlobalState.iconId = R.drawable.ic_qs_immersive_global_on;
+            mImmersiveGlobalState.iconId = enabled ?
+                    R.drawable.ic_qs_pie_global_on : R.drawable.ic_qs_immersive_global_on;
             mImmersiveGlobalState.label = r.getString(R.string.quick_settings_immersive_global_on_label);
         }
         mImmersiveGlobalCallback.refreshView(mImmersiveGlobalTile, mImmersiveGlobalState);
@@ -1545,6 +1559,11 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     protected int getImmersiveMode() {
         return Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.IMMERSIVE_MODE, 0);
+    }
+
+    protected boolean isPieEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.PIE_STATE, 0) == 1;
     }
 
     private void setImmersiveMode(int style) {
