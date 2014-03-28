@@ -59,7 +59,6 @@ import android.security.KeyChain;
 import android.telephony.TelephonyManager;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
-import android.util.SettingConfirmationHelper;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1208,19 +1207,12 @@ class QuickSettings {
     private void selectImmersiveStyle() {
         Resources r = mContext.getResources();
 
-        SettingConfirmationHelper helper = new SettingConfirmationHelper(mContext);
-        helper.showConfirmationDialogForSetting(
-                r.getString(R.string.enable_pie_control_title),
-                r.getString(R.string.enable_pie_control_message),
-                r.getDrawable(R.drawable.want_some_slice),
-                Settings.System.PIE_STATE);
-    }
 
     private void showBrightnessDialog() {
         Intent intent = new Intent(Intent.ACTION_SHOW_BRIGHTNESS_DIALOG);
         mContext.sendBroadcast(intent);
     }
-
+	
     private void showBugreportDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setPositiveButton(com.android.internal.R.string.report, new OnClickListener() {
