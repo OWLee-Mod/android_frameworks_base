@@ -2718,13 +2718,8 @@ public final class Settings {
             RINGTONE,
             NOTIFICATION_SOUND,
             SYSTEM_PROFILES_ENABLED,
-            PHONE_BLACKLIST_ENABLED,
-            PHONE_BLACKLIST_NOTIFY_ENABLED,
-            PHONE_BLACKLIST_PRIVATE_NUMBER_MODE,
-            PHONE_BLACKLIST_UNKNOWN_NUMBER_MODE,
-            PHONE_BLACKLIST_REGEX_ENABLED,
         };
-        
+
         /**
          * Settings to reset on user choice. They will fall back to their default value (0).
          *
