@@ -3908,6 +3908,7 @@ public class Camera {
             return false;
         }
         private static final String KEY_QC_VIDEO_HDR = "video-hdr";
+		 /**
          * Gets the supported Video HDR modes.
          *
          * @return a List of Video HDR_OFF/OFF string constants. null if
@@ -3937,5 +3938,6 @@ public class Camera {
          */
          public void setVideoHDRMode(String videohdr) {
             set(KEY_QC_VIDEO_HDR, videohdr);
-    };
+    }
+  }
 }
