@@ -2579,12 +2579,6 @@ public final class Settings {
         public static final String NAVBAR_RECENTS_CLEAR_ALL = "navbar_recents_clear_all";
 
         /**
-         * Safe headset volume warning option
-         * @hide
-         */
-        public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
-
-        /**
          * Setting to show determine if AOSP dialer is used
          * @hide
          */
@@ -2728,8 +2722,6 @@ public final class Settings {
          * @hide
          */
         public static final String[] SETTINGS_TO_RESET = {
-            QUICK_SETTINGS_QUICK_PULL_DOWN,
-            SAFE_HEADSET_VOLUME
             NAVBAR_RECENTS_CLEAR_ALL
         };
 
