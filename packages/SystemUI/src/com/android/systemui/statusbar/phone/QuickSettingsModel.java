@@ -33,6 +33,7 @@ import android.hardware.usb.UsbManager;
 import android.media.MediaRouter;
 import android.media.MediaRouter.RouteInfo;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.SystemProperties;
