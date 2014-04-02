@@ -2565,7 +2565,6 @@ public final class Settings {
         public static final String QUICK_SETTINGS_TILES = "quick_settings_tiles";
 
         /**
-
          * Setting to show the battery percentage text
          * @hide
          */
@@ -2577,6 +2576,12 @@ public final class Settings {
          * @hide
          */
         public static final String NAVBAR_RECENTS_CLEAR_ALL = "navbar_recents_clear_all";
+
+        /**
+         * Quick settings quick pull down option
+         * @hide
+         */
+        public static final String QUICK_SETTINGS_QUICK_PULL_DOWN = "quick_settings_quick_pull_down";
 
         /**
          * Safe headset volume warning option

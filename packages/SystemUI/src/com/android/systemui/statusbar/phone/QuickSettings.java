@@ -334,7 +334,7 @@ class QuickSettings {
             return;
         }
         mBatteryStyle = Settings.System.getInt(mContext.getContentResolver(),
-                                Settings.System.STATUS_BAR_BATTERY_STYLE, 0);
+                Settings.System.STATUS_BAR_BATTERY_STYLE, 0);
         batteryTile.updateBatterySettings();
         mModel.refreshBatteryTile();
     }
