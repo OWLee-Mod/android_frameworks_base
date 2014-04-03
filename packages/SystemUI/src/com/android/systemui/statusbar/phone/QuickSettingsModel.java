@@ -1,19 +1,19 @@
 /*
- * Copyright (C) 2012 The Android Open Source Project
- * This code has been modified. Portions copyright (C) 2014 ParanoidAndroid Project.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (C) 2012 The Android Open Source Project
+* This code has been modified. Portions copyright (C) 2014 ParanoidAndroid Project.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 package com.android.systemui.statusbar.phone;
 
@@ -65,7 +65,7 @@ import com.android.systemui.statusbar.policy.RotationLockController.RotationLock
 
 import java.util.List;
 
-class QuickSettingsModel implements BluetoothStateChangeCallback,
+public class QuickSettingsModel implements BluetoothStateChangeCallback,
         NetworkSignalChangedCallback,
         BatteryStateChangeCallback,
         BrightnessStateChangeCallback,
@@ -207,6 +207,7 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         }
     };
 
+
     /** Broadcast receive to determine usb tether. */
     private BroadcastReceiver mUsbIntentReceiver = new BroadcastReceiver() {
         @Override
@@ -226,29 +227,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
             onUsbChanged();
         }
     };
-
-    /** ContentObserver to determine the next alarm */
-    private class NextAlarmObserver extends ContentObserver {
-        public NextAlarmObserver(Handler handler) {
-            super(handler);
-        }
-
-    public void onChange(boolean selfChange, Uri uri) {
-            if (uri.equals(Settings.System.getUriFor(Settings.System.PIE_STATE))) {
-                boolean enablePie = Settings.System.getInt(mContext.getContentResolver(),
-                        Settings.System.PIE_STATE, 0) != 0;
-                if (enablePie) switchImmersiveGlobal();
-            }
-            onNextAlarmChanged();
-        }
-
-        public void startObserving() {
-            final ContentResolver cr = mContext.getContentResolver();
-            cr.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.NEXT_ALARM_FORMATTED), false, this,
-                    UserHandle.USER_ALL);
-        }
-    }
 
     /** ContentObserver to watch adb */
     private class BugreportObserver extends ContentObserver {
@@ -351,7 +329,7 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
                     Settings.System.PIE_STATE), false, this);
         }
     }
-
+	
     /** Callback for changes to remote display routes. */
     private class RemoteDisplayRouteCallback extends MediaRouter.SimpleCallback {
         @Override
@@ -529,7 +507,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
                 onUsbChanged();
             }
         };
-
         mNextAlarmObserver = new NextAlarmObserver(mHandler);
         mNextAlarmObserver.startObserving();
         mBugreportObserver = new BugreportObserver(mHandler);
@@ -1063,6 +1040,7 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mBatteryCallback.refreshView(mBatteryTile, mBatteryState);
     }
 
+    // Location
     void addLocationTile(QuickSettingsTileView view, RefreshCallback cb) {
         mLocationTile = view;
         mLocationCallback = cb;
@@ -1203,7 +1181,7 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mImeCallback.refreshView(mImeTile, mImeState);
     }
     /* This implementation is taken from
-       InputMethodManagerService.needsToShowImeSwitchOngoingNotification(). */
+InputMethodManagerService.needsToShowImeSwitchOngoingNotification(). */
     private boolean needsToShowImeSwitchOngoingNotification(InputMethodManager imm) {
         List<InputMethodInfo> imis = imm.getEnabledInputMethodList();
         final int N = imis.size();
@@ -1405,13 +1383,13 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     }
 
     // Sleep: Screen timeout sub-tile (sleep time tile)
-    private static final int SCREEN_TIMEOUT_15     =   15000;
-    private static final int SCREEN_TIMEOUT_30     =   30000;
-    private static final int SCREEN_TIMEOUT_60     =   60000;
-    private static final int SCREEN_TIMEOUT_120    =  120000;
-    private static final int SCREEN_TIMEOUT_300    =  300000;
-    private static final int SCREEN_TIMEOUT_600    =  600000;
-    private static final int SCREEN_TIMEOUT_1800   = 1800000;
+    private static final int SCREEN_TIMEOUT_15 = 15000;
+    private static final int SCREEN_TIMEOUT_30 = 30000;
+    private static final int SCREEN_TIMEOUT_60 = 60000;
+    private static final int SCREEN_TIMEOUT_120 = 120000;
+    private static final int SCREEN_TIMEOUT_300 = 300000;
+    private static final int SCREEN_TIMEOUT_600 = 600000;
+    private static final int SCREEN_TIMEOUT_1800 = 1800000;
 
     void addSleepTimeTile(QuickSettingsTileView view, RefreshCallback cb) {
         mSleepTimeTile = view;
@@ -1492,10 +1470,10 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     }
 
     // Immersive mode
-    private static final int IMMERSIVE_MODE_OFF = 0;
-    private static final int IMMERSIVE_MODE_FULL = 1;
-    private static final int IMMERSIVE_MODE_HIDE_ONLY_NAVBAR = 2;
-    private static final int IMMERSIVE_MODE_HIDE_ONLY_STATUSBAR = 3;
+    public static final int IMMERSIVE_MODE_OFF = 0;
+    public static final int IMMERSIVE_MODE_FULL = 1;
+    public static final int IMMERSIVE_MODE_HIDE_ONLY_NAVBAR = 2;
+    public static final int IMMERSIVE_MODE_HIDE_ONLY_STATUSBAR = 3;
 
     void addImmersiveGlobalTile(QuickSettingsTileView view, RefreshCallback cb) {
         mImmersiveGlobalTile = view;
@@ -1530,20 +1508,28 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         final int mode = getImmersiveMode();
         switch(mode) {
             case IMMERSIVE_MODE_OFF:
-                mImmersiveModeState.iconId = R.drawable.ic_qs_immersive_off;
-                mImmersiveModeState.label = r.getString(R.string.quick_settings_immersive_mode_off_label);
+                mImmersiveModeState.iconId =
+                        R.drawable.ic_qs_immersive_off;
+                mImmersiveModeState.label =
+                        r.getString(R.string.quick_settings_immersive_mode_off_label);
                 break;
             case IMMERSIVE_MODE_FULL:
-                mImmersiveModeState.iconId = R.drawable.ic_qs_immersive_full;
-                mImmersiveModeState.label = r.getString(R.string.quick_settings_immersive_mode_full_label);
+                mImmersiveModeState.iconId =
+                        R.drawable.ic_qs_immersive_full;
+                mImmersiveModeState.label =
+                        r.getString(R.string.quick_settings_immersive_mode_full_label);
                 break;
             case IMMERSIVE_MODE_HIDE_ONLY_NAVBAR:
-                mImmersiveModeState.iconId = R.drawable.ic_qs_immersive_status_bar_off;
-                mImmersiveModeState.label = r.getString(R.string.quick_settings_immersive_mode_no_status_bar_label);
+                mImmersiveModeState.iconId =
+                        R.drawable.ic_qs_immersive_status_bar_off;
+                mImmersiveModeState.label =
+                        r.getString(R.string.quick_settings_immersive_mode_no_status_bar_label);
                 break;
             case IMMERSIVE_MODE_HIDE_ONLY_STATUSBAR:
-                mImmersiveModeState.iconId = R.drawable.ic_qs_immersive_navigation_bar_off;
-                mImmersiveModeState.label = r.getString(R.string.quick_settings_immersive_mode_no_navigation_bar_label);
+                mImmersiveModeState.iconId =
+                        R.drawable.ic_qs_immersive_navigation_bar_off;
+                mImmersiveModeState.label =
+                        r.getString(R.string.quick_settings_immersive_mode_no_navigation_bar_label);
                 break;
         }
         mImmersiveModeCallback.refreshView(mImmersiveModeTile, mImmersiveModeState);
@@ -1664,8 +1650,8 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         WifiManager mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         final ContentResolver cr = mContext.getContentResolver();
         /**
-         * Disable Wifi if enabling tethering
-         */
+* Disable Wifi if enabling tethering
+*/
         int wifiState = mWifiManager.getWifiState();
         if (enable && ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
                 (wifiState == WifiManager.WIFI_STATE_ENABLED))) {
@@ -1677,8 +1663,8 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mWifiManager.setWifiApEnabled(null, enable);
 
         /**
-         *  If needed, restore Wifi on tether disable
-         */
+* If needed, restore Wifi on tether disable
+*/
         if (!enable) {
             int wifiSavedState = 0;
             try {
