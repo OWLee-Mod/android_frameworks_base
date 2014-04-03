@@ -23,8 +23,6 @@ import android.os.Parcelable;
 import android.os.Process;
 import android.util.DisplayMetrics;
 
-import android.util.Log;
-
 import libcore.util.Objects;
 
 /**
@@ -381,10 +379,8 @@ public final class DisplayInfo implements Parcelable {
         return Display.hasAccess(uid, flags, ownerUid);
     }
 
-    //TODO: consider implmenting hybrid here
     private void getMetricsWithSize(DisplayMetrics outMetrics, CompatibilityInfo compatInfo,
             IBinder token, int width, int height) {
-        Log.d("DISPLAYINFO-HYBRID","getMetricsWithSize");
         outMetrics.densityDpi = outMetrics.noncompatDensityDpi = logicalDensityDpi;
         outMetrics.noncompatWidthPixels  = outMetrics.widthPixels = width;
         outMetrics.noncompatHeightPixels = outMetrics.heightPixels = height;

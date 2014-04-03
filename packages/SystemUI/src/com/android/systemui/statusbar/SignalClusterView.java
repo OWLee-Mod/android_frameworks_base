@@ -17,10 +17,6 @@
 package com.android.systemui.statusbar;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.os.AppChangedBinder;
-import android.os.AppChangedCallback;
-import android.os.HybridManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +31,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 // Intimately tied to the design of res/layout/signal_cluster_view.xml
 public class SignalClusterView
         extends LinearLayout
-        implements NetworkController.SignalCluster, AppChangedCallback {
+        implements NetworkController.SignalCluster {
 
     static final boolean DEBUG = false;
     static final String TAG = "SignalClusterView";
@@ -49,8 +45,6 @@ public class SignalClusterView
     private boolean mIsAirplaneMode = false;
     private int mAirplaneIconId = 0;
     private String mWifiDescription, mMobileDescription, mMobileTypeDescription;
-    private HybridManager mHybridManager;
-    private static final boolean DEBUG_HYBRID = HybridManager.DEBUG;
 
     ViewGroup mWifiGroup, mMobileGroup;
     ImageView mWifi, mMobile, mMobileType, mAirplane;
@@ -66,8 +60,6 @@ public class SignalClusterView
 
     public SignalClusterView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        AppChangedBinder.register(this);
-        mHybridManager = (HybridManager) context.getSystemService(Context.HYBRID_SERVICE);
     }
 
     public void setNetworkController(NetworkController nc) {
@@ -214,16 +206,6 @@ public class SignalClusterView
 
         mMobileType.setVisibility(
                 !mWifiVisible ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void appChanged() {
-        if (mHybridManager != null) {
-            final int color = mHybridManager.getStatusBarIconColor();
-            if (DEBUG_HYBRID) Log.d(TAG + "-HYBRID", "Signal Cluster color is " + color);
-            mWifi.setColorFilter(color,PorterDuff.Mode.SRC_ATOP);
-            mMobile.setColorFilter(color,PorterDuff.Mode.SRC_ATOP);
-        }
     }
 }
 
